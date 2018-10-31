@@ -1,0 +1,167 @@
+- alias: 'Siren-PÅ'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.mytest
+      to: 'on'
+  action:   
+    service: homeassistant.turn_on
+    entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
+
+- alias: 'Siren-AV'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.mytest
+      to: 'off'
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
+
+- alias: 'Enable Alarm'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.enable_alarm
+      to: 'on'
+  action:
+    service: notify.emailsms
+    data:
+      title: 'Aktivera Larmet'
+      message: '1'
+
+- alias: 'Disable Alarm'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.enable_alarm
+      to: 'off'
+  action:
+    service: notify.emailsms
+    data:
+      message: '0'
+
+- alias: 'Skalskydd'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.enable_shell
+      to: 'on'
+  action:
+    service: notify.emailsms
+    data:
+      message: '2'
+
+- alias: 'TV on'
+  trigger:
+    platform: state
+    entity_id: input_boolean.enable_tv
+    to: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: media_player.stora_tvn
+
+- alias: 'TV off'
+  trigger:
+    platform: state
+    entity_id: input_boolean.enable_tv
+    to: 'off'
+  action:
+    service: homeassistant.turn_off
+    entity_id: media_player.stora_tvn
+
+
+- alias: 'Släck Altan'
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00010b25c0
+      action_type: free_fall
+  action:
+    service: homeassistant.turn_off
+    entity_id: group.altan 
+
+- alias: 'Spots På Altan'
+  trigger:
+    platform: event
+    event_type: cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00010b25c0
+      action_type: shake_air
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.altan_spot_x_3
+
+
+- alias: 'Öppna Altandörr'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d0001ab5bab
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.altan_spot_x_3
+
+#- alias: 'Hue på Kök'
+#  trigger:
+#    platform: event
+#    event_type: cube_action
+#    event_data:
+#      entity_id: binary_sensor.cube_158d00010b25c0
+#      action_type: rotate
+#  action:
+#    service: light.hue_activate_scene
+#    data:
+#      group_name: 'Kök'
+#      scene_name: 'Bright'
+
+- alias: 'If motion and dark turn on Hall'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0001d5914d
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.illumination_286c0788970f
+    below: 150
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.hall
+    - service: automation.turn_on
+      data:
+        entity_id: automation.Motion_off
+
+
+- alias: 'If no motion for 5 minutes turn off Hall'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d0001d5914d
+    from: 'on'
+    to: 'off'
+    for:
+      minutes: 5
+  action:
+    - service: homeassistant.turn_off
+      entity_id: switch.hall
+    - service: automation.turn_off
+      data:
+        entity_id: automation.Motion_off
+
+- alias: 'Altan PÅ vid enkelklick'
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00019cd397
+      click_type: single
+  action:
+    service: homeassistant.turn_on 
+    entity_id: group.altan
+
+
+
+
+
+

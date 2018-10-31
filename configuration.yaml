@@ -1,0 +1,246 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Tuvan4
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 10
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Stockholm
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#  introduction:
+# Enables configuration UI
+config:
+
+# Start iOS integration
+ios:
+
+duckdns:
+  domain: tuvan4
+  access_token: b87c2b38-cf94-4cf2-add8-07a1bf9ad026
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  ssl_certificate: /home/homeassistant/dehydrated/certs/tuvan4.duckdns.org/fullchain.pem
+  ssl_key: /home/homeassistant/dehydrated/certs/tuvan4.duckdns.org/privkey.pem
+  base_url: tuvan4.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - apple_tv
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Enable mpeg straming engine
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+# Text to speech
+tts:
+  - platform: google
+
+notify:
+  - platform: clicksend
+    name: clicksend
+    username: Akerlund72
+    api_key: E836CF7E-C890-9374-0418-BA02EA4449D0
+    recipient: 46733019377
+
+  - name: emailsms
+    platform: smtp
+    sender: j.akerlund@gmail.com
+    recipient: 46733019377@sms.clicksend.com
+    server: smtp.gmail.com
+    port: 587
+    timeout: 15
+    encryption: starttls
+    username: j.akerlund@gmail.com
+    password: oabgytwwybgkevgw
+    sender_name: My Home Assistant
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+weblink: !include weblinks.yaml
+
+arlo:
+  username: tronninge@gmail.com
+  password: !secret arlo_password
+
+media_player:
+  - platform: webostv
+    host: 192.168.1.116
+    name: SovrumTV
+
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+
+  - platform: samsungtv
+    host: 192.168.1.120
+    name: Stora TVn
+    mac: 60:6B:BD:A9:2B:F3
+
+camera:
+  - platform: arlo
+    ffmpeg_arguments: '-pred 1 -q:v 2'
+
+#  - platform: generic
+#    name: Altan
+#    still_image_url: http://192.168.0.19/image/jpeg.cgi
+#    username: HA
+#    password: !secret dlink_password
+
+tellduslive:
+  #public_key: FEHUVEW84RAFR5SP22RABURUPHAFRUNU
+  #private_key: ZUXEVEGA9USTAZEWRETHAQUBUR69U6EF
+  #token: 04cc4e03a40af8712f855309320741fc0571d14c2
+  #token_secret: 67773838f0ced5a3721583ae6fe16029
+
+light:
+  - platform: hue
+    host: 192.168.1.127
+
+verisure:
+  username: j.akerlund@gmail.com
+  password: !secret verisure_password
+  alarm: 0
+
+device_tracker:
+  - platform: unifi
+    username: j.akerlund@gmail.com
+    password: !secret unifi_password
+    host: 192.168.1.101
+    verify_ssl: False
+    ssid_filter: TuvaNet
+
+alarm_control_panel:
+  - platform: arlo
+    home_mode_name: 'Avaktiverat'
+    away_mode_name: 'Larm'
+
+sensor:
+  - platform: arlo
+    monitored_conditions:
+      - captured_today
+      - battery_level
+
+# Weather prediction
+  - platform: yr
+    name: Väder
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - windSpeed
+      - humidity
+      - symbol
+
+# Solcellerna
+  - platform: jsonrest
+    resource: !secret solaredge
+    method: GET
+    name: SolarEdge jsonrest
+    scan_interval: 400
+
+  - platform: template
+    sensors:
+      grid_consuming_now:
+        value_template: '{{ states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["LOAD"].currentPower }}'
+        unit_of_measurement: 'kW'
+      grid_producing_now:
+        value_template: '{{ states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["PV"].currentPower }}'
+        unit_of_measurement: 'kW'
+      grid_available_now:
+        value_template: '{{ (states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["PV"].currentPower - states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["LOAD"].currentPower | float) | round(2) }}'
+        unit_of_measurement: 'kW'
+
+  ######### AGGREGATED DATA ##########
+  - platform: jsonrest
+    resource: !secret solaredge_aggregate
+    method: GET
+    name: SolarEdge jsonrest_storic
+    scan_interval: 3600
+
+  - platform: template
+    sensors:
+      grid_last_updated:
+        value_template: '{{ states.sensor.solaredge_jsonrest_storic.attributes.overview.lastUpdateTime }}'
+      grid_lifetime:
+        value_template: '{{ (states.sensor.solaredge_jsonrest_storic.attributes.overview.lifeTimeData.energy | float / 1000000) | round(2) }}'
+        unit_of_measurement: 'MWh'
+      grid_this_year:
+        value_template: '{{ (states.sensor.solaredge_jsonrest_storic.attributes.overview.lastYearData.energy | float / 1000) | round(1) }}'
+        unit_of_measurement: 'kWh'
+      grid_this_month:
+        value_template: '{{ (states.sensor.solaredge_jsonrest_storic.attributes.overview.lastMonthData.energy | float / 1000) | round(1) }}'
+        unit_of_measurement: 'kWh'
+      grid_today:
+        value_template: '{{ (states.sensor.solaredge_jsonrest_storic.attributes.overview.lastDayData.energy | float / 1000) | round(1) }}'
+        unit_of_measurement: 'kWh'
+
+
+
+input_number:
+  slider1:
+    name: KitchenLamp
+    initial: 30
+    min: 0  
+    max: 100
+    step: 1
+
+input_boolean:
+  mytest:
+    name: For testing only
+    initial: off
+  enable_alarm:
+    name: Aktivera Larm
+    initial: off
+  enable_shell:
+    name: Aktivera skalskydd
+    initial: off
+  enable_tv:
+    name: Turn on TV
+    initial: off
+
+# Enables the frontend
+frontend:
+
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: D7A4CB7B0BBD4A3B
+
+zwave:
+  usb_path: /dev/ttyAMA0
+#  network_key: "0x57, 0x5F, 0x5A, 0x23, 0x43, 0x8F, 0x91, 0x8C, 0xC5, 0x56, 0x44, 0x68, 0x3C, 0x13, 0xEB, 0xF8"

@@ -1,0 +1,219 @@
+default_view:
+  view: yes
+  icon: mdi:home 
+  entities:
+    - group.altan
+    - group.forrad
+    - group.vrum
+    - group.arlo
+    - group.sovrum
+    - group.kitchen
+    - group.weather
+    - group.groventre
+    - group.solar
+
+klimat:
+    - sensor.temperature_158d0001bb65c0
+    - sensor.humidity_158d0001bb65c0
+    - sensor.forrad_temperature
+    - sensor.forrad_humidity
+    - sensor.altan_temperature
+    - sensor.altan_humidity
+    - sensor.friggebod_temperature
+    - sensor.friggebod_humidity
+solar:
+  name: Solceller
+  entities:
+    - sensor.grid_last_updated
+    - sensor.grid_producing_now
+    - sensor.grid_today
+    - sensor.grid_this_month
+
+arlo:
+  name: Arlo
+  entities:
+    - sensor.battery_level_garageuppfart
+    - sensor.battery_level_kitchen
+    - sensor.captured_today_garageuppfart
+    - sensor.captured_today_kitchen
+    - camera.kitchen
+    - camera.garageuppfart
+    - alarm_control_panel.tuvascam
+
+cameras:
+  name: Cameras
+  entities:
+    - camera.garageuppfart
+    - camera.kitchen
+
+weather:
+  name: Väder
+  entities:
+    - sensor.vader_temperature
+    - sensor.vader_wind_speed
+    - sensor.vader_humidity
+    - weblink.yr_vader
+
+house:
+  name: Hus
+  entities:
+    - input_boolean.enable_alarm
+    - input_boolean.enable_shell
+
+kitchen:
+  name: Kök
+  entities:
+    - light.kok
+    - switch.kok_ljusstake_
+    - sensor.temperature_158d0001bb65c0
+    - sensor.humidity_158d0001bb65c0
+
+forrad:
+  name: Förråd
+  entities:
+    - sensor.forrad_temperature
+    - sensor.forrad_humidity
+    - sensor.frysbox_temperature
+
+vrum:
+  name: Vardagsrum
+  entities:
+    - switch.klotlampa_kamin
+    - switch.vrum
+    - switch.vrum_pelare
+    - switch.vrum_skaphorna
+    - switch.vrum_stjarna
+    - switch.vrum_fonster_tv
+    - media_player.ue55d8000_ue55d8000
+    - input_boolean.enable_tv
+    - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature
+    - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance
+
+altan:
+  name: Altan
+  entities:
+    - switch.altan_ufo
+    - switch.altan_spot_x_3
+    - light.altan
+    - sensor.altan_temperature
+    - sensor.altan_humidity
+    - input_boolean.mytest
+    - camera.altan
+    - binary_sensor.door_window_sensor_158d0001ab5bab
+
+hall:
+  entities:
+    - switch.hall
+
+kontor:
+  entities:
+    - switch.kontor_fonster
+
+utomhus:
+  entities:
+    - switch.uteplats
+    - switch.garage
+    - switch.huvudentre
+    - switch.friggebod_tradack
+
+family:
+  entities:
+    - device_tracker.hampusiphone
+    - device_tracker.jonasiphone
+    - device_tracker.monica
+    - device_tracker.rasmus
+
+media:
+  entities:
+    - media_player.spotify
+    - media_player.porch
+    - media_player.kitchen
+    - media_player.sovrumTV
+    - media_player.stora_tvn
+
+sovrum:
+  entities:
+    - light.sovrum
+    - switch.garderobsdorr
+
+groventre:
+  entities:
+    - lock.groventre
+    - switch.groventre_fonster
+
+# Views
+forrad_view:
+  view: yes
+  name: Förråd
+  entities:
+    - group.forrad
+
+altan_view:
+  view: yes
+  name: Altan
+  entities:
+    - group.altan
+
+media_view:
+  view: yes
+  icon: mdi:television
+  entities:
+    - group.media
+
+people_view:
+  view: yes
+  name: whoishome?
+  icon: mdi:account-multiple
+  entities: 
+    - group.family
+
+vardagsrum_view:
+  view: yes
+  name: Vardagsrum
+  entities:
+    - group.vrum
+
+utomhus_view:
+  view: yes
+  name: Ytterbelysning
+  entities:
+    - group.utomhus
+
+
+sovrum_view:
+  view: yes
+  name: Sovrum
+  entities:
+    - group.sovrum
+
+kitchen_view:
+  view: yes
+  name: Kök
+  entities:
+    - group.kitchen
+
+weather_view:
+  view: yes
+  name: Väder
+  entities:
+    - group.weather
+
+cameras_view:
+  view: yes
+  name: Cameras
+  entities:
+    - group.cameras
+
+solar_view:
+  view: yes
+  name: Solar
+  icon: mdi:solar-power
+  entities:
+    - group.solar
+
+
+groventre_view:
+  view: no
+  name: Groventré
+  entities:
+    - group.groventre

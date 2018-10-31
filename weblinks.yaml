@@ -1,0 +1,6 @@
+entities:
+  - name: Yr Väder
+    url: https://www.yr.no/place/Sweden/Halland/Halmstad/hour_by_hour.html
+    icon: mdi:weather-rainy
+
+
