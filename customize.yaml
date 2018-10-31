@@ -1,3 +1,5 @@
+device_tracker.jonasiphone:
+  friendly_name: Jonas
 device_tracker.rasmussiphone:
   friendly_name: Rasmus
 device_tracker.monicasiphone:

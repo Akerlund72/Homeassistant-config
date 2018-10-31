@@ -142,17 +142,33 @@ groventre:
     - switch.groventre_fonster
 
 # Views
-forrad_view:
+alarm_view:
   view: yes
-  name: Förråd
+  name: Alarm
+  icon: mdi:shield-half-full
   entities:
-    - group.forrad
+    - group.house
 
-altan_view:
+solar_view:
   view: yes
-  name: Altan
+  name: Solar
+  icon: mdi:solar-power
   entities:
-    - group.altan
+    - group.solar
+
+cameras_view:
+  view: yes
+  name: Cameras
+  icon: mdi:cctv
+  entities:
+    - group.cameras
+
+weather_view:
+  view: yes
+  name: Väder
+  icon: mdi:weather-partlycloudy
+  entities:
+    - group.weather
 
 media_view:
   view: yes
@@ -164,8 +180,20 @@ people_view:
   view: yes
   name: whoishome?
   icon: mdi:account-multiple
-  entities: 
+  entities:
     - group.family
+
+forrad_view:
+  view: yes
+  name: Förråd
+  entities:
+    - group.forrad
+
+altan_view:
+  view: yes
+  name: Altan
+  entities:
+    - group.altan
 
 vardagsrum_view:
   view: yes
@@ -191,26 +219,6 @@ kitchen_view:
   name: Kök
   entities:
     - group.kitchen
-
-weather_view:
-  view: yes
-  name: Väder
-  entities:
-    - group.weather
-
-cameras_view:
-  view: yes
-  name: Cameras
-  entities:
-    - group.cameras
-
-solar_view:
-  view: yes
-  name: Solar
-  icon: mdi:solar-power
-  entities:
-    - group.solar
-
 
 groventre_view:
   view: no
