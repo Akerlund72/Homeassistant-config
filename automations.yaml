@@ -1,19 +1,33 @@
 - alias: 'Siren-PÅ'
   trigger:
-    - platform: state
-      entity_id: input_boolean.mytest
-      to: 'on'
+    platform: state
+    entity_id: input_boolean.mytest
+    to: 'on'
   action:   
     service: homeassistant.turn_on
     entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
 
 - alias: 'Siren-AV'
   trigger:
-    - platform: state
-      entity_id: input_boolean.mytest
-      to: 'off'
+    platform: state
+    entity_id: input_boolean.mytest
+    to: 'off'
   action:
     service: homeassistant.turn_off
+    entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
+
+- alias: 'Trigger Siren'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_2
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.enable_alarm
+    state: 'on'
+  action:
+    service: homeassistant.turn_on
     entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
 
 - alias: 'Enable Alarm'

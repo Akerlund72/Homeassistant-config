@@ -22,12 +22,15 @@ binary_sensor.door_window_sensor_158d0001ab5bab:
 sensor.fibaro_system_fgms001zw5_motion_sensor_temperature:
   friendly_name: Temperatur v-rum
 sensor.grid_this_month:
+  icon: mdi:chart-histogram
   friendly_name: Månadsproduktion
 sensor.grid_this_year:
+  icon: mdi:chart-histogram
   friendly_name: Årsproduktion
 sensor.grid_today:
+  icon: mdi:chart-histogram
   friendly_name: Produktion idag
-sensor.grid_producing_now:
+sensor.power_now:
   icon: mdi:solar-power
   friendly_name: Aktuell effekt
 sensor.grid_last_updated:

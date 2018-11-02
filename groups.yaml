@@ -25,7 +25,7 @@ solar:
   name: Solceller
   entities:
     - sensor.grid_last_updated
-    - sensor.grid_producing_now
+    - sensor.power_now
     - sensor.grid_today
     - sensor.grid_this_month
 

@@ -163,30 +163,12 @@ sensor:
       - symbol
 
 # Solcellerna
-  - platform: jsonrest
-    resource: !secret solaredge
-    method: GET
-    name: SolarEdge jsonrest
-    scan_interval: 400
-
-  - platform: template
-    sensors:
-      grid_consuming_now:
-        value_template: '{{ states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["LOAD"].currentPower }}'
-        unit_of_measurement: 'kW'
-      grid_producing_now:
-        value_template: '{{ states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["PV"].currentPower }}'
-        unit_of_measurement: 'kW'
-      grid_available_now:
-        value_template: '{{ (states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["PV"].currentPower - states.sensor.solaredge_jsonrest.attributes.siteCurrentPowerFlow["LOAD"].currentPower | float) | round(2) }}'
-        unit_of_measurement: 'kW'
-
   ######### AGGREGATED DATA ##########
   - platform: jsonrest
-    resource: !secret solaredge_aggregate
+    resource: !secret solaredge_overview
     method: GET
     name: SolarEdge jsonrest_storic
-    scan_interval: 3600
+    scan_interval: 400
 
   - platform: template
     sensors:
@@ -204,6 +186,9 @@ sensor:
       grid_today:
         value_template: '{{ (states.sensor.solaredge_jsonrest_storic.attributes.overview.lastDayData.energy | float / 1000) | round(1) }}'
         unit_of_measurement: 'kWh'
+      power_now:
+        value_template: '{{ (states.sensor.solaredge_jsonrest_storic.attributes.overview.currentPower.power | float / 1000) | round(1) }}'
+        unit_of_measurement: 'kW'
 
 input_number:
   slider1:
