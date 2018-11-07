@@ -11,6 +11,7 @@ default_view:
     - group.weather
     - group.groventre
     - group.solar
+    - group.utomhus
 
 klimat:
     - sensor.temperature_158d0001bb65c0
@@ -21,6 +22,10 @@ klimat:
     - sensor.altan_humidity
     - sensor.friggebod_temperature
     - sensor.friggebod_humidity
+    - sensor.netatmo_sovrum_humidity
+    - sensor.netatmo_sovrum_temperature
+    - sensor.netatmo_sovrum_co2
+
 solar:
   name: Solceller
   entities:
@@ -28,6 +33,7 @@ solar:
     - sensor.power_now
     - sensor.grid_today
     - sensor.grid_this_month
+    - sensor.grid_this_year
 
 arlo:
   name: Arlo
@@ -47,7 +53,7 @@ cameras:
     - camera.kitchen
 
 weather:
-  name: Väder
+  name: Väder om 24 tim
   entities:
     - sensor.vader_temperature
     - sensor.vader_wind_speed
@@ -59,6 +65,7 @@ house:
   entities:
     - input_boolean.enable_alarm
     - input_boolean.enable_shell
+    - sensor.netatmo_sovrum_pressure
 
 kitchen:
   name: Kök
@@ -86,8 +93,8 @@ vrum:
     - switch.vrum_fonster_tv
     - media_player.ue55d8000_ue55d8000
     - input_boolean.enable_tv
-    - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature
-    - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance
+    - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_2
+    - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_2
 
 altan:
   name: Altan
@@ -102,19 +109,24 @@ altan:
     - binary_sensor.door_window_sensor_158d0001ab5bab
 
 hall:
+  name: Hall
   entities:
     - switch.hall
 
 kontor:
+  name: Kontor
   entities:
     - switch.kontor_fonster
 
 utomhus:
+  name: Utomhus
   entities:
     - switch.uteplats
     - switch.garage
     - switch.huvudentre
     - switch.friggebod_tradack
+    - sensor.netatmo_tradgard_humidity
+    - sensor.netatmo_tradgard_temperature
 
 family:
   entities:
@@ -132,11 +144,16 @@ media:
     - media_player.stora_tvn
 
 sovrum:
+  name: Sovrum
   entities:
     - light.sovrum
     - switch.garderobsdorr
+    - sensor.netatmo_sovrum_co2
+    - sensor.netatmo_sovrum_humidity
+    - sensor.netatmo_sovrum_temperature
 
 groventre:
+  name: Groventré
   entities:
     - lock.groventre
     - switch.groventre_fonster

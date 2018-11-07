@@ -137,7 +137,7 @@ device_tracker:
   - platform: unifi
     username: !secret email
     password: !secret unifi_password
-    host: 192.168.1.101
+    host: 192.168.1.147
     verify_ssl: False
     ssid_filter: TuvaNet
 
@@ -222,3 +222,11 @@ xiaomi_aqara:
 
 zwave:
   usb_path: /dev/ttyAMA0
+
+
+netatmo:
+  api_key: 5be1d5e02d3e04c71d8bd2e8
+  secret_key: 5mbfSiiTeDjMvKVCeBigvuYfP
+  username: !secret email
+  password: !secret netatmo
+

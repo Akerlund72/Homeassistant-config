@@ -19,7 +19,7 @@ sensor.temperature_158d0001bb65c0:
 binary_sensor.door_window_sensor_158d0001ab5bab:
   friendly_name: Altandörr
   icon: mdi:door
-sensor.fibaro_system_fgms001zw5_motion_sensor_temperature:
+sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_2:
   friendly_name: Temperatur v-rum
 sensor.grid_this_month:
   icon: mdi:chart-histogram
@@ -49,8 +49,25 @@ sensor.vader_temperature:
   friendly_name: Temperatur
   icon: mdi:thermometer
 switch.garderobsdorr:
+  device_class: door
   friendly_name: Garderobsdörr
-  icon: mdi:door
 switch.kok_ljusstake_:
   friendly_name: Ljusstake
   icon: mdi:lamp
+sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_2:
+  friendly_name: Ljusstyrka
+  icon: mdi:theme-light-dark
+sensor.netatmo_sovrum_humidity:
+  friendly_name: Luftfuktighet
+sensor.netatmo_sovrum_temperature:
+  friendly_name: Temperatur
+sensor.netatmo_tradgard_humidity:
+  friendly_name: Luftfuktighet
+sensor.netatmo_tradgard_temperature:
+  friendly_name: Temperatur ute
+sensor.netatmo_sovrum_pressure:
+  friendly_name: Luft-tryck
+sensor.netatmo_sovrum_co2:
+  friendly_name: CO2
+  icon: mdi:periodic-table-co2
+
