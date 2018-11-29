@@ -51,6 +51,7 @@ cameras:
   entities:
     - camera.garageuppfart
     - camera.kitchen
+    - camera.altan
 
 weather:
   name: Väder om 24 tim
@@ -158,6 +159,14 @@ groventre:
     - lock.groventre
     - switch.groventre_fonster
 
+friggebod:
+  name: Friggebod
+  entities:
+    - sensor.friggebod_temperature
+    - sensor.friggebod_humidity
+    - light.friggebod
+    - switch.friggebod_tradack
+
 # Views
 alarm_view:
   view: yes
@@ -242,3 +251,10 @@ groventre_view:
   name: Groventré
   entities:
     - group.groventre
+
+friggebod_view:
+  view: yes
+  name: Friggebod
+  entities:
+    - group.friggebod
+

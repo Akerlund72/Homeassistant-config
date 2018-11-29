@@ -70,4 +70,6 @@ sensor.netatmo_sovrum_pressure:
 sensor.netatmo_sovrum_co2:
   friendly_name: CO2
   icon: mdi:periodic-table-co2
-
+switch.garderobsdorr:
+  icon: mdi:door
+  friendly_name: Garderobsdörr

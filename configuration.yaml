@@ -116,9 +116,9 @@ camera:
   - platform: arlo
     ffmpeg_arguments: '-pred 1 -q:v 2'
 
-#  - platform: generic
-#    name: Altan
-#    still_image_url: http://192.168.0.19/image/jpeg.cgi
+  - platform: generic
+    name: Altan
+    still_image_url: http://192.168.1.161/image/jpeg.cgi
 #    username: HA
 #    password: !secret dlink_password
 
@@ -147,6 +147,10 @@ alarm_control_panel:
     away_mode_name: 'Larm'
 
 sensor:
+  - platform: hue
+    ip_address: 192.168.1.127
+    token: qSPPif7UrqNPU4vBWx9YNhgGqJqR9juWjpL-3UbN
+
   - platform: arlo
     monitored_conditions:
       - captured_today
@@ -230,3 +234,9 @@ netatmo:
   username: !secret email
   password: !secret netatmo
 
+homekit:
+  filter:
+    include_domains:
+      - lock
+      - sensor
+      - switch
