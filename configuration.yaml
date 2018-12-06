@@ -116,11 +116,11 @@ camera:
   - platform: arlo
     ffmpeg_arguments: '-pred 1 -q:v 2'
 
-  - platform: generic
+  - platform: mjpeg
     name: Altan
-    still_image_url: http://192.168.1.161/image/jpeg.cgi
-#    username: HA
-#    password: !secret dlink_password
+    mjpeg_url: http://192.168.1.161/video.cgi
+    username: admin
+    password: !secret dlink_password
 
 tellduslive:
 
@@ -155,6 +155,7 @@ sensor:
     monitored_conditions:
       - captured_today
       - battery_level
+      - signal_strength
 
 # Weather prediction
   - platform: yr
@@ -165,6 +166,8 @@ sensor:
       - windSpeed
       - humidity
       - symbol
+      - cloudiness
+      - precipitation
 
 # Solcellerna
   ######### AGGREGATED DATA ##########
@@ -204,7 +207,7 @@ input_number:
 
 input_boolean:
   mytest:
-    name: For testing only
+    name: Aktivera Siren!
     initial: off
   enable_alarm:
     name: Aktivera Larm
@@ -240,3 +243,7 @@ homekit:
       - lock
       - sensor
       - switch
+
+influxdb:
+  host: 127.0.0.1
+

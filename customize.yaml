@@ -48,9 +48,6 @@ sensor.vader_humidity:
 sensor.vader_temperature:
   friendly_name: Temperatur
   icon: mdi:thermometer
-switch.garderobsdorr:
-  device_class: door
-  friendly_name: Garderobsdörr
 switch.kok_ljusstake_:
   friendly_name: Ljusstake
   icon: mdi:lamp
@@ -73,3 +70,16 @@ sensor.netatmo_sovrum_co2:
 switch.garderobsdorr:
   icon: mdi:door
   friendly_name: Garderobsdörr
+binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_2:
+  friendly_name: Närvaro vardagsrum
+sensor.netatmo_regn_rain:
+  icon: mdi:weather-rainy
+  friendly_name: Regnmängd
+sensor.vader_cloudiness:
+  friendly_name: Molnighet
+  icon: mdi:weather-cloudy
+sensor.vader_precipitation:
+  friendly_name: Regnmängd
+  icon: mdi:weather-rainy
+
+

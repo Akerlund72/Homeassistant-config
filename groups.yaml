@@ -59,6 +59,8 @@ weather:
     - sensor.vader_temperature
     - sensor.vader_wind_speed
     - sensor.vader_humidity
+    - sensor.vader_precipitation
+    - sensor.vader_cloudiness
     - weblink.yr_vader
 
 house:
@@ -96,6 +98,7 @@ vrum:
     - input_boolean.enable_tv
     - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_2
     - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_2
+    - binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_2
 
 altan:
   name: Altan
@@ -128,6 +131,7 @@ utomhus:
     - switch.friggebod_tradack
     - sensor.netatmo_tradgard_humidity
     - sensor.netatmo_tradgard_temperature
+    - sensor.netatmo_regn_rain
 
 family:
   entities:
