@@ -25,6 +25,7 @@ klimat:
     - sensor.netatmo_sovrum_humidity
     - sensor.netatmo_sovrum_temperature
     - sensor.netatmo_sovrum_co2
+    - sensor.aeotec_zw100_multisensor_6_temperature
 
 solar:
   name: Solceller
@@ -84,6 +85,8 @@ forrad:
     - sensor.forrad_temperature
     - sensor.forrad_humidity
     - sensor.frysbox_temperature
+    - sensor.aeotec_zw100_multisensor_6_temperature
+    - sensor.aeotec_zw100_multisensor_6_relative_humidity
 
 vrum:
   name: Vardagsrum
@@ -162,6 +165,8 @@ groventre:
   entities:
     - lock.groventre
     - switch.groventre_fonster
+    - light.tvattstuga
+    - switch.larm_vp
 
 friggebod:
   name: Friggebod

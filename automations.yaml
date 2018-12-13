@@ -175,7 +175,27 @@
     entity_id: group.altan
 
 
+- alias: 'VP Larm'
+  trigger:
+    platform: state
+    entity_id: switch.larm_vp
+    from: 'off'
+    to: 'on'
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      title: "Alarm VP!"
+      message: "Värmepump larmar"
 
 
-
-
+- alias: 'Hank Scene Button 1'
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 1
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "Hank scene 1 triggered"
