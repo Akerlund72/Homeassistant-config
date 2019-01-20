@@ -20,7 +20,7 @@ binary_sensor.door_window_sensor_158d0001ab5bab:
   friendly_name: Altandörr
   icon: mdi:door
   device_class: door
-sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_2:
+sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_7:
   friendly_name: Temperatur v-rum
 sensor.grid_this_month:
   icon: mdi:chart-histogram
@@ -53,7 +53,7 @@ switch.kok_ljusstake_:
   friendly_name: Ljusstake
   icon: mdi:lamp
   device_class: light
-sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_2:
+sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_7:
   friendly_name: Ljusstyrka
   icon: mdi:theme-light-dark
 sensor.netatmo_sovrum_humidity:
@@ -73,7 +73,7 @@ switch.garderobsdorr:
   device_class: door
   friendly_name: Garderobsdörr
   icon: mdi:door
-binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_2:
+binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_7:
   friendly_name: Närvaro vardagsrum
 sensor.netatmo_regn_rain:
   icon: mdi:weather-rainy
@@ -84,9 +84,9 @@ sensor.vader_cloudiness:
 sensor.vader_precipitation:
   friendly_name: Regnmängd
   icon: mdi:weather-rainy
-sensor.aeotec_zw100_multisensor_6_relative_humidity:
+sensor.aeotec_zw100_multisensor_6_relative_humidity_6:
   friendly_name: Luftfuktighet förråd
-sensor.aeotec_zw100_multisensor_6_temperature:
+sensor.aeotec_zw100_multisensor_6_temperature_6:
   friendly_name: Temperatur förråd
 switch.larm_vp:
   friendly_name: Larm Värmepump!

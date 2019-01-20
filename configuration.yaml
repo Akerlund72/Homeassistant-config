@@ -18,6 +18,9 @@ homeassistant:
 # Enables configuration UI
 config:
 
+# Enables the frontend
+frontend:
+
 # Start iOS integration
 ios:
 
@@ -44,6 +47,7 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore: apple_tv
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 #conversation:
@@ -217,9 +221,6 @@ input_boolean:
     name: Turn on TV
     initial: off
 
-# Enables the frontend
-frontend:
-
 xiaomi_aqara:
   discovery_retry: 5
   gateways:
@@ -227,7 +228,7 @@ xiaomi_aqara:
 
 zwave:
   usb_path: /dev/ttyAMA0
-
+  network_key: !secret zwave_key
 
 netatmo:
   api_key: 5be1d5e02d3e04c71d8bd2e8
@@ -242,6 +243,6 @@ homekit:
       - sensor
       - switch
 
-influxdb:
-  host: 127.0.0.1
+#influxdb:
+#  host: 127.0.0.1
 

@@ -25,7 +25,7 @@ klimat:
     - sensor.netatmo_sovrum_humidity
     - sensor.netatmo_sovrum_temperature
     - sensor.netatmo_sovrum_co2
-    - sensor.aeotec_zw100_multisensor_6_temperature
+    - sensor.aeotec_zw100_multisensor_6_temperature_2
 
 solar:
   name: Solceller
@@ -70,6 +70,7 @@ house:
     - input_boolean.enable_alarm
     - input_boolean.enable_shell
     - sensor.netatmo_sovrum_pressure
+    - alarm_control_panel.tuvascam
 
 kitchen:
   name: Kök
@@ -85,8 +86,8 @@ forrad:
     - sensor.forrad_temperature
     - sensor.forrad_humidity
     - sensor.frysbox_temperature
-    - sensor.aeotec_zw100_multisensor_6_temperature
-    - sensor.aeotec_zw100_multisensor_6_relative_humidity
+    - sensor.aeotec_zw100_multisensor_6_temperature_2
+    - sensor.aeotec_zw100_multisensor_6_relative_humidity_2
 
 vrum:
   name: Vardagsrum
@@ -98,10 +99,9 @@ vrum:
     - switch.vrum_stjarna
     - switch.vrum_fonster_tv
     - media_player.ue55d8000_ue55d8000
-    - input_boolean.enable_tv
-    - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_2
-    - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_2
-    - binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_2
+    - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_7
+    - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_7
+    - binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_7
 
 altan:
   name: Altan
@@ -119,6 +119,7 @@ hall:
   name: Hall
   entities:
     - switch.hall
+    - binary_sensor.motion_sensor_158d0001d5914d
 
 kontor:
   name: Kontor
@@ -266,4 +267,11 @@ friggebod_view:
   name: Friggebod
   entities:
     - group.friggebod
+
+hall_view:
+  view: yes
+  name: Hall
+  entities:
+    - group.hall
+
 

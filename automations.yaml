@@ -1,4 +1,5 @@
 - alias: 'Siren-PÅ'
+  initial_state: True
   trigger:
     platform: state
     entity_id: input_boolean.mytest
@@ -8,6 +9,7 @@
     entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
 
 - alias: 'Siren-AV'
+  initial_state: True
   trigger:
     platform: state
     entity_id: input_boolean.mytest
@@ -17,9 +19,10 @@
     entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
 
 - alias: 'Trigger Siren'
+  initial_state: True
   trigger:
     platform: state
-    entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_2
+    entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_7
     from: 'off'
     to: 'on'
   condition:
@@ -31,6 +34,7 @@
     entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
 
 - alias: 'Enable Alarm'
+  initial_state: True
   trigger:
     - platform: state
       entity_id: input_boolean.enable_alarm
@@ -42,6 +46,7 @@
       message: '1'
 
 - alias: 'Disable Alarm'
+  initial_state: True
   trigger:
     - platform: state
       entity_id: input_boolean.enable_alarm
@@ -52,6 +57,7 @@
       message: '0'
 
 - alias: 'Skalskydd'
+  initial_state: True
   trigger:
     - platform: state
       entity_id: input_boolean.enable_shell
@@ -61,26 +67,8 @@
     data:
       message: '2'
 
-- alias: 'TV on'
-  trigger:
-    platform: state
-    entity_id: input_boolean.enable_tv
-    to: 'on'
-  action:
-    service: homeassistant.turn_on
-    entity_id: media_player.stora_tvn
-
-- alias: 'TV off'
-  trigger:
-    platform: state
-    entity_id: input_boolean.enable_tv
-    to: 'off'
-  action:
-    service: homeassistant.turn_off
-    entity_id: media_player.stora_tvn
-
-
 - alias: 'Släck Altan'
+  initial_state: True
   trigger:
     platform: event
     event_type: cube_action
@@ -104,6 +92,7 @@
 
 
 - alias: 'Öppna Altandörr'
+  initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.door_window_sensor_158d0001ab5bab
@@ -131,6 +120,7 @@
 #      scene_name: 'Bright'
 
 - alias: 'If motion and dark turn on Hall'
+  initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.motion_sensor_158d0001d5914d
@@ -141,14 +131,15 @@
     entity_id: sensor.illumination_286c0788970f
     below: 150
   action:
-    - service: homeassistant.turn_on
-      entity_id: switch.hall
-    - service: automation.turn_on
-      data:
-        entity_id: automation.Motion_off
+    service: homeassistant.turn_on
+    entity_id: switch.hall
+#    - service: automation.turn_on
+#      data:
+#        entity_id: automation.Motion_off
 
 
 - alias: 'If no motion for 5 minutes turn off Hall'
+  initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.motion_sensor_158d0001d5914d
@@ -157,13 +148,14 @@
     for:
       minutes: 5
   action:
-    - service: homeassistant.turn_off
-      entity_id: switch.hall
-    - service: automation.turn_off
-      data:
-        entity_id: automation.Motion_off
+    service: homeassistant.turn_off
+    entity_id: switch.hall
+#    - service: automation.turn_off
+#      data:
+#        entity_id: automation.Motion_off
 
 - alias: 'Altan PÅ vid enkelklick'
+  initial_state: True
   trigger:
     platform: event
     event_type: click
@@ -174,8 +166,8 @@
     service: homeassistant.turn_on 
     entity_id: group.altan
 
-
 - alias: 'VP Larm'
+  initial_state: True
   trigger:
     platform: state
     entity_id: switch.larm_vp
@@ -187,15 +179,117 @@
       title: "Alarm VP!"
       message: "Värmepump larmar"
 
+- alias: 'Hank Scene People Button '
+  initial_state: True
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 2
+      scene_data: 0
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "People button triggered"
 
-- alias: 'Hank Scene Button 1'
+- alias: 'Hank Scene People Button Long'
+  initial_state: True
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 2
+      scene_data: 2
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "People button long triggered"     
+
+
+- alias: 'Hank Scene Moon Button'
+  initial_state: True
   trigger:
     platform: event
     event_type: zwave.scene_activated
     event_data:
       entity_id: zwave.hank_hkzwscn04_scene_controller
       scene_id: 1
+      scene_data: 0
   action:
     service: notify.ios_jonas_iphone
     data:
-      message: "Hank scene 1 triggered"
+      message: "Moon button triggered"
+
+- alias: 'Hank Scene Moon Button Long'
+  initial_state: True
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 1
+      scene_data: 2
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "Moon button long triggered"
+
+
+- alias: 'Hank Scene Off Button'
+  initial_state: True
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 3
+      scene_data: 0
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "Off button triggered"
+
+- alias: 'Hank Scene Off Button Long'
+  initial_state: True
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 3
+      scene_data: 2
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "Off button long triggered"
+
+
+- alias: 'Hank Scene On Button'
+  initial_state: True
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 4
+      scene_data: 0
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "On button triggered"
+
+- alias: 'Hank Scene On Button Long'
+  initial_state: True
+  trigger:
+    platform: event
+    event_type: zwave.scene_activated
+    event_data:
+      entity_id: zwave.hank_hkzwscn04_scene_controller
+      scene_id: 4
+      scene_data: 2
+  action:
+    service: notify.ios_jonas_iphone
+    data:
+      message: "On button long triggered"
