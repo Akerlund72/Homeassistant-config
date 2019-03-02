@@ -34,7 +34,8 @@ http:
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   ssl_certificate: /home/homeassistant/dehydrated/certs/tuvan4.duckdns.org/fullchain.pem
   ssl_key: /home/homeassistant/dehydrated/certs/tuvan4.duckdns.org/privkey.pem
-  base_url: !secret base_url
+  base_url: !secret base_url  
+  #ssl_profile: intermediate
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -147,6 +148,7 @@ alarm_control_panel:
   - platform: arlo
     home_mode_name: 'Avaktiverat'
     away_mode_name: 'Larm'
+  - platform: manual
 
 sensor:
   - platform: hue
@@ -199,6 +201,9 @@ sensor:
         value_template: '{{ (states.sensor.solaredge_jsonrest_storic.attributes.overview.currentPower.power | float / 1000) | round(1) }}'
         unit_of_measurement: 'kW'
 
+  - platform: cert_expiry
+    host: tuvan4.duckdns.org
+
 input_number:
   slider1:
     name: KitchenLamp
@@ -222,7 +227,7 @@ input_boolean:
     initial: off
 
 xiaomi_aqara:
-  discovery_retry: 5
+  discovery_retry: 10
   gateways:
     - key: D7A4CB7B0BBD4A3B
 
@@ -246,3 +251,5 @@ homekit:
 #influxdb:
 #  host: 127.0.0.1
 
+
+system_health:

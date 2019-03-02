@@ -18,10 +18,10 @@ klimat:
     - sensor.humidity_158d0001bb65c0
     - sensor.forrad_temperature
     - sensor.forrad_humidity
-    - sensor.altan_temperature
-    - sensor.altan_humidity
-    - sensor.friggebod_temperature
-    - sensor.friggebod_humidity
+    - sensor.altan_temperature_2
+    - sensor.altan_humidity_2
+    - sensor.friggebod_temperature_2
+    - sensor.friggebod_humidity_2
     - sensor.netatmo_sovrum_humidity
     - sensor.netatmo_sovrum_temperature
     - sensor.netatmo_sovrum_co2
@@ -71,12 +71,13 @@ house:
     - input_boolean.enable_shell
     - sensor.netatmo_sovrum_pressure
     - alarm_control_panel.tuvascam
+    - alarm_control_panel.ha_alarm
 
 kitchen:
   name: Kök
   entities:
     - light.kok
-    - switch.kok_ljusstake_
+    - switch.kok_ljusstake
     - sensor.temperature_158d0001bb65c0
     - sensor.humidity_158d0001bb65c0
 
@@ -85,23 +86,25 @@ forrad:
   entities:
     - sensor.forrad_temperature
     - sensor.forrad_humidity
-    - sensor.frysbox_temperature
+    - sensor.frysbox_temperature_2
     - sensor.aeotec_zw100_multisensor_6_temperature_2
     - sensor.aeotec_zw100_multisensor_6_relative_humidity_2
+    - sensor.telldus_tzwp_102_plug_in_switch_power_2
+    - sensor.telldus_tzwp_102_plug_in_switch_energy_2
 
 vrum:
   name: Vardagsrum
   entities:
-    - switch.klotlampa_kamin
+    - light.vardagsrum
     - switch.vrum
     - switch.vrum_pelare
     - switch.vrum_skaphorna
     - switch.vrum_stjarna
     - switch.vrum_fonster_tv
     - media_player.ue55d8000_ue55d8000
-    - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature_7
-    - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance_7
-    - binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_7
+    - sensor.fibaro_system_fgms001_zw5_motion_sensor_temperature
+    - sensor.fibaro_system_fgms001_zw5_motion_sensor_luminance
+    - binary_sensor.fibaro_system_fgms001_zw5_motion_sensor_sensor
 
 altan:
   name: Altan
@@ -109,11 +112,12 @@ altan:
     - switch.altan_ufo
     - switch.altan_spot_x_3
     - light.altan
-    - sensor.altan_temperature
-    - sensor.altan_humidity
+    - sensor.altan_temperature_2
+    - sensor.altan_humidity_2
     - input_boolean.mytest
     - camera.altan
     - binary_sensor.door_window_sensor_158d0001ab5bab
+    - sensor.telldus_tzwp_102_plug_in_switch_energy
 
 hall:
   name: Hall
@@ -176,6 +180,8 @@ friggebod:
     - sensor.friggebod_humidity
     - light.friggebod
     - switch.friggebod_tradack
+    - sensor.telldus_tzwp_102_plug_in_switch_power_3
+    - sensor.telldus_tzwp_102_plug_in_switch_energy_3
 
 # Views
 alarm_view:

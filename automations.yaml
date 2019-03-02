@@ -1,12 +1,29 @@
 - alias: 'Siren-PÅ'
   initial_state: True
   trigger:
-    platform: state
-    entity_id: input_boolean.mytest
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d0001ab5bab
+      to: 'on'
+    - platform: numeric_state
+      entity_id: binary_sensor.aeotec_zw100_multisensor_6_burglar_2
+      above: 0
+  condition:
+    condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed_home
   action:   
-    service: homeassistant.turn_on
-    entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
+    - service: switch.turn_on
+      entity_id: switch.vision_zm1601eu_5_battery_operated_siren_switch
+
+    - service: switch.turn_on
+      entity_id: switch.vrum
+
+    - service: switch.turn_on
+      entity_id: switch.garage
+
+    - service: notify.ios_jonas_iphone
+      data:
+        message: "LARM I FÖRRÅD UTLÖST"
 
 - alias: 'Siren-AV'
   initial_state: True
@@ -15,14 +32,14 @@
     entity_id: input_boolean.mytest
     to: 'off'
   action:
-    service: homeassistant.turn_off
-    entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
+    service: switch.turn_off
+    entity_id: switch.vision_zm1601eu_5_battery_operated_siren_switch
 
 - alias: 'Trigger Siren'
   initial_state: True
   trigger:
     platform: state
-    entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor_7
+    entity_id: binary_sensor.fibaro_system_fgms001_zw5_motion_sensor_sensor
     from: 'off'
     to: 'on'
   condition:
@@ -31,7 +48,7 @@
     state: 'on'
   action:
     service: homeassistant.turn_on
-    entity_id: switch.vision_zm1601eu5_battery_operated_siren_switch
+    entity_id: switch.vision_zm1601eu_5_battery_operated_siren_switch
 
 - alias: 'Enable Alarm'
   initial_state: True
@@ -133,12 +150,9 @@
   action:
     service: homeassistant.turn_on
     entity_id: switch.hall
-#    - service: automation.turn_on
-#      data:
-#        entity_id: automation.Motion_off
 
 
-- alias: 'If no motion for 5 minutes turn off Hall'
+- alias: 'If no motion for 10 minutes turn off Hall'
   initial_state: True
   trigger:
     platform: state
@@ -146,13 +160,10 @@
     from: 'on'
     to: 'off'
     for:
-      minutes: 5
+      minutes: 15
   action:
     service: homeassistant.turn_off
     entity_id: switch.hall
-#    - service: automation.turn_off
-#      data:
-#        entity_id: automation.Motion_off
 
 - alias: 'Altan PÅ vid enkelklick'
   initial_state: True
@@ -185,7 +196,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 2
       scene_data: 0
   action:
@@ -199,7 +210,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 2
       scene_data: 2
   action:
@@ -214,7 +225,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 1
       scene_data: 0
   action:
@@ -228,7 +239,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 1
       scene_data: 2
   action:
@@ -243,13 +254,12 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 3
       scene_data: 0
   action:
-    service: notify.ios_jonas_iphone
-    data:
-      message: "Off button triggered"
+    service: switch.turn_off
+    entity_id: switch.alloutsidelamps
 
 - alias: 'Hank Scene Off Button Long'
   initial_state: True
@@ -257,7 +267,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 3
       scene_data: 2
   action:
@@ -272,7 +282,7 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 4
       scene_data: 0
   action:
@@ -286,10 +296,12 @@
     platform: event
     event_type: zwave.scene_activated
     event_data:
-      entity_id: zwave.hank_hkzwscn04_scene_controller
+      entity_id: zwave.hank_hkzwscn04_scene_controller_2
       scene_id: 4
       scene_data: 2
   action:
-    service: notify.ios_jonas_iphone
+    service: xiaomi_aqara.play_ringtone
     data:
-      message: "On button long triggered"
+      gw_mac: 286C0788970F
+      ringtone_id: 11
+      ringtone_vol: 3
